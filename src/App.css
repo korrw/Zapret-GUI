@@ -1,0 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  min-height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-app-region: drag;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  padding: 0;
+  -webkit-app-region: no-drag;
+  overflow: hidden;
+}
+
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  background: #000;
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.titlebar-drag {
+  flex: 1;
+}
+
+.titlebar-buttons {
+  display: flex;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  width: 46px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titlebar-btn:hover {
+  background: #1a1a1a;
+  color: #888;
+}
+
+.titlebar-btn.close:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+.header {
+  padding: 60px 30px 0;
+}
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #444;
+  transition: all 0.3s ease;
+}
+
+.status-dot.active {
+  background: #00ff88;
+  box-shadow: 0 0 20px #00ff88;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.power-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0;
+  padding: 0 30px;
+}
+
+.power-button {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 4px solid #222;
+  background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.power-button::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #333, #111);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.power-button:hover::before {
+  opacity: 1;
+}
+
+.power-button.active {
+  border-color: #00ff88;
+  background: linear-gradient(135deg, #001a0f 0%, #002415 100%);
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+}
+
+.power-button.active::before {
+  background: linear-gradient(135deg, #00ff88, #00cc6a);
+  opacity: 0.2;
+}
+
+.power-icon {
+  width: 80px;
+  height: 80px;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.power-button.active .power-icon {
+  color: #00ff88;
+  filter: drop-shadow(0 0 10px #00ff88);
+}
+
+.power-button:hover .power-icon {
+  transform: scale(1.1);
+}
+
+.power-label {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.config-section {
+  margin-top: 40px;
+  padding: 0 30px 40px;
+}
+
+.config-section h2 {
+  font-size: 16px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.config-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.config-grid::-webkit-scrollbar-track {
+  background: #111;
+  border-radius: 3px;
+}
+
+.config-grid::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+.config-grid::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+.config-item {
+  padding: 15px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 12px;
+  color: #888;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+.config-item:hover:not(:disabled) {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #aaa;
+}
+
+.config-item.selected {
+  background: #00ff88;
+  border-color: #00ff88;
+  color: #000;
+  font-weight: 600;
+}
+
+.config-item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 20px;
+  }
+  
+  .power-button {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .power-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .config-grid {
+    grid-template-columns: 1fr;
+  }
+}
