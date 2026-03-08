@@ -33,11 +33,16 @@ ipcMain.handle('start-zapret', async (event, config) => {
   }
 
   const batFile = configMap[config]
-  const zapretPath = path.join(__dirname, '../../zapret-discord-youtube', batFile)
+  const zapretPath = path.join(process.resourcesPath, 'zapret-discord-youtube', batFile)
 
   try {
+    const isDev = !app.isPackaged
+    const zapretDir = isDev 
+      ? path.join(__dirname, '../../zapret-discord-youtube')
+      : path.join(process.resourcesPath, 'zapret-discord-youtube')
+    
     zapretProcess = spawn('cmd.exe', ['/c', 'start', 'cmd.exe', '/k', `"${zapretPath}"`], {
-      cwd: path.join(__dirname, '../../zapret-discord-youtube'),
+      cwd: zapretDir,
       detached: true,
       shell: true
     })
